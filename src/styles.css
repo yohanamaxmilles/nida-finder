@@ -61,3 +61,26 @@ form>label{font-size:11px;font-weight:800;color:#3c4c66;display:block;margin-bot
 .copy-button:disabled{opacity:.45;cursor:not-allowed}
 footer{display:flex;justify-content:space-between;padding:22px 3px 5px;color:#9aa5b5;font-size:10px}
 @media(max-width:680px){.page-shell{padding:18px 15px}.topbar{margin-bottom:20px}.brand strong{font-size:14px}.wallet{gap:7px;padding:6px}.wallet-icon{display:none}.topup{padding:9px;font-size:10px;margin-left:2px}.hero{padding:29px 23px;min-height:245px}.hero-art{position:absolute;right:-75px;opacity:.25}.hero-copy>p{max-width:340px}.search-panel,.result-panel{padding:20px 17px}.section-heading p,.result-head p{max-width:235px;line-height:1.5}.secure-label{font-size:0;padding:8px}.input-row{flex-direction:column}.search-button{height:48px}.result-footer{align-items:flex-start;gap:12px;flex-direction:column}footer{gap:10px;flex-wrap:wrap}}
+
+.top-actions{display:flex;align-items:center;gap:9px}
+.wallet-click{border:1px solid #e5eaf3;cursor:pointer;text-align:left}
+.account-button,.icon-button,.modal-close{display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid #e1e7f0;background:white;color:#52627b;border-radius:9px;padding:10px 12px;font-size:11px;font-weight:700}
+.wallet-drawer{position:relative;z-index:3;margin:-18px 0 20px auto;max-width:390px;padding:18px;background:#fff;border:1px solid #e3e9f2;border-radius:15px;box-shadow:0 15px 40px #142b4d20}
+.drawer-heading{display:flex;justify-content:space-between;align-items:center}.drawer-heading strong{font:800 15px Manrope}.drawer-heading p{font-size:11px;color:#8290a5;margin:4px 0 0}
+.icon-button{padding:7px}
+.balance-card{margin:15px 0;padding:18px;border-radius:12px;background:linear-gradient(120deg,#082d72,#06449e);color:white}
+.balance-card small,.balance-card strong,.balance-card span{display:block}.balance-card small{font-size:11px;color:#c6d9fb}.balance-card strong{font:800 30px Manrope;margin:5px 0}.balance-card span{font-size:10px;color:#c6d9fb}
+.transactions-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:#263b5d;margin:16px 0 8px}
+.transaction{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid #edf0f5;font-size:11px}.transaction b,.transaction small{display:block}.transaction small{font-size:9px;color:#8b98aa;margin-top:4px}.transaction>strong{font-size:13px;color:#b34b4b}.transaction>strong.positive{color:#16815e}
+.empty-transactions,.wallet-note{font-size:10px;line-height:1.5;color:#8290a5}.wallet-note{padding:10px;background:#f5f7fb;border-radius:8px}
+.modal-backdrop{position:fixed;inset:0;z-index:10;background:#061a3dcc;display:grid;place-items:center;padding:18px}
+.auth-modal{position:relative;width:min(100%,420px);max-height:92vh;overflow:auto;background:white;border-radius:18px;padding:29px;box-shadow:0 25px 80px #0004}
+.modal-close{position:absolute;right:15px;top:15px;padding:7px}
+.auth-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#edf3ff;color:#174a9c;margin-bottom:15px}
+.auth-modal h2{font:800 21px Manrope;margin:0 0 6px}.auth-modal>p{font-size:12px;color:#8290a5;margin:0 0 20px}
+.auth-form{display:grid;gap:14px;margin:0}.auth-form label{display:grid;gap:7px;font-size:11px;font-weight:700;color:#3c4c66}.auth-form label svg{display:none}
+.auth-form input{height:44px;border:1px solid #dce4f0;border-radius:9px;padding:0 12px;outline:none;font-size:13px}.auth-form input:focus{border-color:#2860ad;box-shadow:0 0 0 3px #2860ad18}
+.auth-submit{height:46px;margin-top:4px}.auth-error{padding:10px;border-radius:8px;background:#fff0ed;color:#a13e31;font-size:11px;line-height:1.5}
+.switch-auth{width:100%;border:0;background:none;color:#174a9c;font-size:11px;font-weight:800;padding:15px 0 8px}
+.auth-footnote{display:block;color:#8a96a8;font-size:9px;line-height:1.5;text-align:center;margin-top:8px}
+@media(max-width:680px){.top-actions{gap:5px}.account-button{font-size:0;padding:10px}.wallet-click{padding:6px 8px}.wallet-click .wallet-icon{display:grid}.wallet-drawer{margin:-8px 0 15px}.auth-modal{padding:24px 20px}}
