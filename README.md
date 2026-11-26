@@ -2,32 +2,30 @@
 
 A privacy-first identity verification service interface for Tanzania.
 
-## Current status
-This repository contains the initial frontend scaffold. It does **not** access NIDA records or look up a person's identity from a phone number.
-
-## Planned capabilities
-- Phone-number entry and input validation
-- Consent and identity verification flow
-- Results display only after an authorized verification provider confirms the user's identity
-- Copy verified details with clear user consent
-- Wallet, prepaid credits, and payment-provider integration
-- Admin dashboard, audit logs, and rate limiting
-
-## Technology
-- React
-- Vite
-- Plain CSS
+## Current implementation
+- Responsive React + Vite frontend
+- Express API scaffold with request validation, rate limiting, Helmet security headers, and CORS
+- Consent-required verification request placeholder
+- No NIDA records are queried, inferred, or stored
+- Payment checkout is intentionally disabled until a merchant provider is selected and configured
 
 ## Run locally
+Requires Node.js 20 or later.
+
 ```bash
 npm install
-npm run dev
+cp .env.example .env
+npm run dev:full
 ```
 
-## Required before production
-1. Obtain written authorization and API documentation from NIDA or an authorized identity-verification provider.
-2. Implement server-side authentication, consent capture, access controls, audit logging, and data minimization.
-3. Integrate a supported payment provider. Never store payment credentials or API secrets in frontend code.
-4. Move this repository to private before adding confidential configuration or production integration details.
+Frontend: http://localhost:5173  
+Backend health: http://localhost:4000/api/health
 
-All lookup and payment actions are placeholders until the relevant authorized services are configured.
+## Important production requirements
+1. Obtain written authorization and API documentation from NIDA or an authorized identity-verification provider.
+2. Implement provider-side identity proofing, consent records, server-side authentication, access controls, audit logs, retention limits, and security review.
+3. Choose a supported payment provider and implement verified server-side callbacks/webhooks before selling credits.
+4. Do not put API keys, payment secrets, or personal identity records in frontend code or Git.
+5. Make this repository private before adding confidential integration details.
+
+The current verification endpoint only acknowledges a consented request with a reference ID. It does not return a person's name or NIDA number.
