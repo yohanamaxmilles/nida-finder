@@ -54,7 +54,7 @@ export default function App() {
         <form onSubmit={handleSearch}>
           <label htmlFor="phone">Namba ya simu</label>
           <div className="input-row">
-            <div className="phone-input"><Phone size={19} /><span className="country-code">+255</span><input id="phone" inputMode="tel" autoComplete="tel" placeholder="7XX XXX XXX" value={phone} onChange={e => { setPhone(e.target.value); setStatus('idle'); }} /></div>
+            <div className="phone-input"><Phone size={19} /><span className="country-code">TZ</span><input id="phone" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" value={phone} onChange={e => { setPhone(e.target.value); setStatus('idle'); }} /></div>
             <button className="search-button" type="submit" disabled={!validPhone || !consent}><Search size={19} /> Endelea</button>
           </div>
           <p className="hint">Mfano: 0712 345 678</p>
