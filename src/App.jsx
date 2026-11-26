@@ -6,15 +6,24 @@ export default function App() {
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState('idle');
   const [copied, setCopied] = useState(false);
+  const [requestId, setRequestId] = useState('');
 
   const normalizedPhone = phone.replace(/\s+/g, '');
   const validPhone = /^(0[67]\d{8}|\+255[67]\d{8}|255[67]\d{8})$/.test(normalizedPhone);
 
-  function handleSearch(event) {
+  async function handleSearch(event) {
     event.preventDefault();
     if (!validPhone || !consent) return;
-    setStatus('unavailable');
+    setStatus('loading');
     setCopied(false);
+    setRequestId('');
+    try {
+      const response = await fetch('/api/verification/start', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: normalizedPhone, consent }) });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Ombi halijafanikiwa.');
+      setRequestId(data.requestId);
+      setStatus('pending');
+    } catch (_error) { setStatus('unavailable'); }
   }
 
   async function copyText() {
@@ -55,13 +64,15 @@ export default function App() {
           <label htmlFor="phone">Namba ya simu</label>
           <div className="input-row">
             <div className="phone-input"><Phone size={19} /><span className="country-code">TZ</span><input id="phone" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" value={phone} onChange={e => { setPhone(e.target.value); setStatus('idle'); }} /></div>
-            <button className="search-button" type="submit" disabled={!validPhone || !consent}><Search size={19} /> Endelea</button>
+            <button className="search-button" type="submit" disabled={!validPhone || !consent || status === 'loading'}><Search size={19} /> Endelea</button>
           </div>
           <p className="hint">Mfano: 0712 345 678</p>
           <label className="consent-row"><input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} /><span>Nathibitisha kuwa mimi ndiye mtumiaji wa namba hii au nina mamlaka halali, na nakubali taarifa zangu zithibitishwe kupitia mtoa huduma aliyeidhinishwa.</span></label>
         </form>
 
-        {status === 'unavailable' && <div className="notice"><Info size={19} /><div><strong>Muunganisho rasmi unahitajika</strong><p>Utafutaji wa taarifa haujawashwa. Mfumo utaweza kuthibitisha utambulisho baada ya kuunganishwa na API rasmi ya NIDA au mtoa huduma aliyeidhinishwa.</p></div></div>}
+        {status === 'loading' && <div className="notice"><Clock3 size={19} /><div><strong>Inatuma ombi...</strong><p>Tafadhali subiri.</p></div></div>}
+        {status === 'pending' && <div className="notice"><Clock3 size={19} /><div><strong>Ombi limepokelewa, linasubiri uthibitishaji</strong><p>Namba ya ombi: {requestId}. Hakuna taarifa za NIDA zilizotafutwa au kurudishwa bado.</p></div></div>}
+        {status === 'unavailable' && <div className="notice"><Info size={19} /><div><strong>Huduma ya uthibitishaji haijawezeshwa</strong><p>Backend haipatikani au API rasmi ya NIDA bado haijaunganishwa. Hakuna taarifa binafsi zilizofichuliwa.</p></div></div>}
         {status === 'payment-pending' && <div className="notice"><Clock3 size={19} /><div><strong>Malipo bado hayajaunganishwa</strong><p>Vocha zitawezeshwa baada ya kuchagua na kuunganisha mtoa huduma wa malipo.</p></div></div>}
       </section>
 
