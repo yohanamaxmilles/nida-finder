@@ -17,7 +17,7 @@ app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, limit: 30, standardHeaders
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, verificationProviderConfigured: false, paymentsConfigured: false }));
 
-const schema = z.object({ phone: z.string().regex(/^(0[67]\\d{8}|\\+255[67]\\d{8}|255[67]\\d{8})$/), consent: z.literal(true) });
+const schema = z.object({ phone: z.string().regex(/^(0[67]\d{8}|\\+255[67]\d{8}|255[67]\d{8})$/), consent: z.literal(true) });
 app.post('/api/verification/start', (req, res) => {
   const parsed = schema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: 'Namba si sahihi au ridhaa haijatolewa.' });
